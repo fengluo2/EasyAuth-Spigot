@@ -2,26 +2,16 @@ package ua.starman.easylogin.auther;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.*;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.event.Cancellable;
+import org.bukkit.event.Event;
 import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
-import ua.starman.easylogin.EasyAuth;
 import ua.starman.easylogin.utils.Utils;
 import ua.starman.easylogin.utils.Vars;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 public class AuthWorker {
     public static boolean checkPassword(String password, PlayerData playerData) {
@@ -48,8 +38,12 @@ public class AuthWorker {
 
             if (metadataNeedRegisterList.isEmpty() && metadataBlocked.asBoolean()) {
                 player.sendMessage(Utils.parseMessage(ChatColor.RED + "Enter /login <password>"));
-            } else if (!metadataNeedRegisterList.isEmpty() && metadataBlocked.asBoolean()){
-                player.sendMessage(Utils.parseMessage(ChatColor.RED + "Enter /register <password> <password>"));
+            } else if (!metadataNeedRegisterList.isEmpty() && metadataBlocked.asBoolean()) {
+                if (Vars.register) {
+                    player.sendMessage(Utils.parseMessage(ChatColor.RED + "Enter /register <password> <password>"));
+                } else {
+                    player.sendMessage(Utils.parseMessage(ChatColor.RED + "Server is closed register function"));
+                }
             }
 
         }

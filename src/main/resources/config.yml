@@ -23,3 +23,7 @@ limits:
   ip:
     # If false - will not check IP difference on player join
     working: true
+
+register:
+  # Open register
+  enable: true

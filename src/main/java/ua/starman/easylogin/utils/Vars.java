@@ -1,9 +1,7 @@
 package ua.starman.easylogin.utils;
 
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import ua.starman.easylogin.EasyAuth;
-import ua.starman.easylogin.limits.TimeLimit;
 
 import java.io.File;
 import java.util.Objects;
@@ -14,4 +12,5 @@ public class Vars {
     public static File dataDir = new File(Objects.requireNonNull(plugin.getConfig().getString("data.dir")));
     public static File dataDirOld = new File("plugins/EasyAuth/player-data");
     public static String encode = plugin.getConfig().getString("data.method");
+    public static Boolean register = plugin.getConfig().getBoolean("register.enable", true);
 }
